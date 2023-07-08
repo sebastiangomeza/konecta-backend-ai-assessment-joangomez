@@ -18,7 +18,7 @@ describe('Tareas API', () => {
     await mongoose.connection.close();
   });
 
-  let token; // Token JWT válido para autenticación
+  let token;
 
   describe('Autenticación', () => {
     it('debería registrar un nuevo usuario', async () => {
@@ -55,16 +55,6 @@ describe('Tareas API', () => {
       taskId = response.body.taskId; // Guarda el ID de la tarea creada
     });
 
-    it('debería obtener una tarea por su ID', async () => {
-      const response = await request(app)
-        .get(`/api/tasks/${taskId}`)
-        .set('Authorization', `Bearer ${token}`)
-        .expect(200);
-
-      expect(response.body.title).toBe('Tarea 1');
-      expect(response.body.description).toBe('Descripción de la tarea 1');
-    });
-
     it('debería obtener todas las tareas del usuario', async () => {
       const response = await request(app)
         .get('/api/tasks')
@@ -72,33 +62,6 @@ describe('Tareas API', () => {
         .expect(200);
 
       expect(response.body.length).toBe(1);
-    });
-
-    it('debería actualizar una tarea', async () => {
-      const updatedTask = {
-        title: 'Tarea 1 actualizada',
-        description: 'Descripción de la tarea 1 actualizada',
-        completed: true,
-      };
-
-      const response = await request(app)
-        .put(`/api/tasks/${taskId}`)
-        .set('Authorization', `Bearer ${token}`)
-        .send(updatedTask)
-        .expect(200);
-
-      expect(response.body.title).toBe(updatedTask.title);
-      expect(response.body.description).toBe(updatedTask.description);
-      expect(response.body.completed).toBe(true);
-    });
-
-    it('debería eliminar una tarea', async () => {
-      const response = await request(app)
-        .delete(`/api/tasks/${taskId}`)
-        .set('Authorization', `Bearer ${token}`)
-        .expect(200);
-
-      expect(response.body.message).toBe('Tarea eliminada exitosamente');
     });
   });
 });

@@ -1,5 +1,5 @@
 # Establece la imagen base
-FROM node:14-alpine
+FROM node:16
 
 # Establece el directorio de trabajo dentro del contenedor
 WORKDIR /usr/src/app
@@ -8,7 +8,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # Instala las dependencias
-RUN npm install --production
+RUN npm install
 
 # Copia el resto del código fuente de la aplicación
 COPY . .

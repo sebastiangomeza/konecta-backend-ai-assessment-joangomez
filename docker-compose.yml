@@ -9,6 +9,7 @@ services:
     depends_on:
       - db
     environment:
+      - PORT=3000
       - MONGO_URI=mongodb://db:27017/mydatabase
       - JWT_SECRET=mysecretkey
   db:

@@ -1,0 +1,20 @@
+# Dependencias de Node.js
+/node_modules
+
+# Archivo de entorno
+.env
+
+# Archivos de registro
+/logs
+
+# Archivos de compilación
+/dist
+
+# Archivos de respaldo de editor de código
+.vscode/
+*.sublime-*
+*.swp
+
+# Otros archivos y directorios generados
+.DS_Store
+Thumbs.db
